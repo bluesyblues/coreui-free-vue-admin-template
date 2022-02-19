@@ -1,10 +1,7 @@
 <template>
   <CRow>
     <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Table</strong> <small>Basic example</small>
-        </CCardHeader>
+      <CCard class="mb-3 mt-0">
         <CCardBody>
           <CTable>
             <CTableHead>
@@ -62,10 +59,7 @@
       </CCard>
     </CCol>
     <CCol :xs="12">
-      <CCard class="mb-4">
-        <CCardHeader>
-          <strong>Vue Accordion</strong> <small>Flush</small>
-        </CCardHeader>
+      <CCard class="mb-2">
         <CCardBody>
           <CAccordion flush>
             <CAccordionItem>
@@ -82,6 +76,18 @@
             </CAccordionItem>
             <CAccordionItem>
               <CAccordionHeader> Accordion Item #3 </CAccordionHeader>
+              <CAccordionBody>
+                <strong>This is the third item's accordion body.</strong>
+              </CAccordionBody>
+            </CAccordionItem>
+            <CAccordionItem>
+              <CAccordionHeader> Accordion Item #4 </CAccordionHeader>
+              <CAccordionBody>
+                <strong>This is the third item's accordion body.</strong>
+              </CAccordionBody>
+            </CAccordionItem>
+            <CAccordionItem>
+              <CAccordionHeader> Accordion Item #5 </CAccordionHeader>
               <CAccordionBody>
                 <strong>This is the third item's accordion body.</strong>
               </CAccordionBody>
