@@ -1,6 +1,5 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-
 import DefaultLayout from '@/layouts/DefaultLayout'
 
 const routes = [
@@ -10,7 +9,7 @@ const routes = [
     component: DefaultLayout,
     children: [
       {
-        path: '/user',
+        path: 'user',
         name: 'User',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -19,7 +18,7 @@ const routes = [
           import(/* webpackChunkName: "dashboard" */ '@/views/UserView.vue'),
       },
       {
-        path: '/log',
+        path: 'log',
         name: 'Log',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -28,13 +27,13 @@ const routes = [
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       },
       {
-        path: '/account',
+        path: 'account',
         name: 'Account',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
+          import(/* webpackChunkName: "dashboard" */ '@/views/Login.vue'),
       },
     ],
   },

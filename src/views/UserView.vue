@@ -4,43 +4,39 @@
       <CCard class="mb-3 mt-0">
         <CCardBody>
           <CTable>
-            <CTableHead>
-              <CTableRow>
-                <CTableHeaderCell scope="col">Class</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
             <CTableBody>
               <CTableRow>
                 <CTableDataCell>
-                  <CDropdown color="secondary">
-                    <CDropdownToggle color="primary">
-                      identifier
-                    </CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem href="#">user_id</CDropdownItem>
-                      <CDropdownItem href="#">username</CDropdownItem>
-                      <CDropdownItem href="#">email</CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
+                  <CFormSelect
+                    v-model="searchKey"
+                    aria-label="searchKey"
+                    :options="[
+                      'Search key',
+                      { label: 'user_id', value: '1' },
+                      { label: 'username', value: '2' },
+                      { label: 'email', value: '3' },
+                    ]"
+                  >
+                  </CFormSelect>
                 </CTableDataCell>
                 <CTableDataCell>
-                  <CDropdown color="secondary">
-                    <CDropdownToggle color="primary">
-                      identifier
-                    </CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem href="#">match</CDropdownItem>
-                      <CDropdownItem href="#">like</CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
+                  <CFormSelect
+                    v-model="searchMethod"
+                    aria-label="searchMethod"
+                    :options="[
+                      'Search method',
+                      { label: 'exact match', value: '1' },
+                      { label: 'like', value: '2' },
+                    ]"
+                  >
+                  </CFormSelect>
                 </CTableDataCell>
                 <CTableDataCell>
                   <CInputGroup class="mb-3">
                     <CFormInput
-                      placeholder="word"
-                      aria-label="word"
+                      v-model="keyword"
+                      placeholder="keyword"
+                      aria-label="keyword"
                       aria-describedby="button-addon2"
                     />
                     <CButton
@@ -48,6 +44,7 @@
                       color="secondary"
                       variant="outline"
                       id="button-addon2"
+                      @click="getData"
                       >Query
                     </CButton>
                   </CInputGroup>
@@ -109,17 +106,22 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 export default {
-  name: 'Accordion',
-  setup() {
-    const activeKey = ref(1)
-    const flushActiveKey = ref(1)
-
+  name: 'User',
+  data() {
     return {
-      activeKey,
-      flushActiveKey,
+      searchKey: '1',
+      searchMethod: '1',
+      keyword: '',
     }
+  },
+  methods: {
+    getData() {
+      alert(this.searchKey + this.searchMethod + this.keyword)
+    },
+  },
+  setup() {
+    return {}
   },
 }
 </script>
