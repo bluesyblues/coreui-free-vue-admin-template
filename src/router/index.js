@@ -9,7 +9,7 @@ const routes = [
     component: DefaultLayout,
     children: [
       {
-        path: 'user',
+        path: '/user',
         name: 'User',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -18,22 +18,13 @@ const routes = [
           import(/* webpackChunkName: "dashboard" */ '@/views/UserView.vue'),
       },
       {
-        path: 'log',
+        path: '/log',
         name: 'Log',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
-      },
-      {
-        path: 'account',
-        name: 'Account',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(/* webpackChunkName: "dashboard" */ '@/views/Login.vue'),
       },
     ],
   },
