@@ -59,34 +59,10 @@
       <CCard class="mb-2">
         <CCardBody>
           <CAccordion flush>
-            <CAccordionItem>
-              <CAccordionHeader> Accordion Item #1 </CAccordionHeader>
+            <CAccordionItem :key="i" v-for="(d, i) in items">
+              <CAccordionHeader> {{ d.header }} </CAccordionHeader>
               <CAccordionBody>
-                <strong>This is the first item's accordion body.</strong>
-              </CAccordionBody>
-            </CAccordionItem>
-            <CAccordionItem>
-              <CAccordionHeader> Accordion Item #2 </CAccordionHeader>
-              <CAccordionBody>
-                <strong>This is the second item's accordion body.</strong>
-              </CAccordionBody>
-            </CAccordionItem>
-            <CAccordionItem>
-              <CAccordionHeader> Accordion Item #3 </CAccordionHeader>
-              <CAccordionBody>
-                <strong>This is the third item's accordion body.</strong>
-              </CAccordionBody>
-            </CAccordionItem>
-            <CAccordionItem>
-              <CAccordionHeader> Accordion Item #4 </CAccordionHeader>
-              <CAccordionBody>
-                <strong>This is the third item's accordion body.</strong>
-              </CAccordionBody>
-            </CAccordionItem>
-            <CAccordionItem>
-              <CAccordionHeader> Accordion Item #5 </CAccordionHeader>
-              <CAccordionBody>
-                <strong>This is the third item's accordion body.</strong>
+                <strong>{{ d.body }}</strong>
               </CAccordionBody>
             </CAccordionItem>
           </CAccordion>
@@ -113,6 +89,16 @@ export default {
       searchKey: '1',
       searchMethod: '1',
       keyword: '',
+      items: [
+        {
+          header: 'asdf',
+          body: 'qwer',
+        },
+        {
+          header: 'gggg',
+          body: 'ggggggg',
+        },
+      ],
     }
   },
   methods: {
