@@ -14,6 +14,7 @@
                       <CIcon icon="cil-user" />
                     </CInputGroupText>
                     <CFormInput
+                      v-model="username"
                       placeholder="Username"
                       autocomplete="username"
                     />
@@ -23,6 +24,7 @@
                       <CIcon icon="cil-lock-locked" />
                     </CInputGroupText>
                     <CFormInput
+                      v-model="password"
                       type="password"
                       placeholder="Password"
                       autocomplete="current-password"
@@ -30,7 +32,13 @@
                   </CInputGroup>
                   <CRow>
                     <CCol :xs="6">
-                      <CButton color="primary" class="px-4"> Login </CButton>
+                      <CButton
+                        color="primary"
+                        class="px-4"
+                        @click="getLoginData"
+                      >
+                        Login
+                      </CButton>
                     </CCol>
                     <CCol :xs="6" class="text-right">
                       <CButton color="link" class="px-0">
@@ -64,7 +72,31 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Login',
+  data() {
+    return {
+      username: '',
+      password: '',
+    }
+  },
+  methods: {
+    getLoginData() {
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8888/api/v1/login',
+        data: {
+          username: this.username,
+          password: this.password,
+        },
+      }).then(function (response) {
+        const access_token = response.data.tokens.access_token
+        const refresh_token = response.data.tokens.refresh_token
+        localStorage.setItem('access_token', access_token)
+        localStorage.setItem('refresh_token', refresh_token)
+      })
+    },
+  },
 }
 </script>

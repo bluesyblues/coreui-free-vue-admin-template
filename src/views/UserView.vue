@@ -12,9 +12,9 @@
                     aria-label="searchKey"
                     :options="[
                       'Search key',
-                      { label: 'user_id', value: '1' },
-                      { label: 'username', value: '2' },
-                      { label: 'email', value: '3' },
+                      { label: 'user_id', value: 'user_id' },
+                      { label: 'username', value: 'username' },
+                      { label: 'email', value: 'email' },
                     ]"
                   >
                   </CFormSelect>
@@ -25,8 +25,8 @@
                     aria-label="searchMethod"
                     :options="[
                       'Search method',
-                      { label: 'exact match', value: '1' },
-                      { label: 'like', value: '2' },
+                      { label: 'exact match', value: 'match' },
+                      { label: 'like', value: 'like' },
                     ]"
                   >
                   </CFormSelect>
@@ -59,10 +59,71 @@
       <CCard class="mb-2">
         <CCardBody>
           <CAccordion flush>
-            <CAccordionItem :key="i" v-for="(d, i) in items">
-              <CAccordionHeader> {{ d.header }} </CAccordionHeader>
+            <CAccordionItem :key="i" v-for="(d, i) in currentPageUserInfo">
+              <CAccordionHeader v-if="selectedSearchKey === 'username'">
+                {{ d.username }} ({{ d.user_id.slice(0, 8) }})
+              </CAccordionHeader>
+              <CAccordionHeader v-else-if="selectedSearchKey === 'email'">
+                {{ d.email }} ({{ d.user_id.slice(0, 8) }})
+              </CAccordionHeader>
+              <CAccordionHeader v-else-if="selectedSearchKey === 'user_id'">
+                {{ d.user_id }}
+              </CAccordionHeader>
               <CAccordionBody>
-                <strong>{{ d.body }}</strong>
+                <CTable>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell>
+                        user_id : {{ d.user_id }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        username : {{ d.username }}
+                      </CTableDataCell>
+                      <CTableDataCell>email : {{ d.email }}</CTableDataCell>
+                      <CTableDataCell>
+                        is_active : {{ d.is_active }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        is_admin : {{ d.is_admin }}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell>
+                        created_time : {{ d.created_time }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        last_login_time : {{ d.last_login_time }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        compression_toolkit_authority : {{ d.authorities[0] }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        model_search_authority : {{ d.authorities[1] }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        device_farm_authority : {{ d.authorities[2] }}
+                      </CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell>
+                        privacy_policy_agreement :
+                        {{ d.privacy_policy_agreement }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        marketing_agreement : {{ d.marketing_agreement }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        first_name : {{ d.first_name }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        last_name : {{ d.last_name }}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        company : {{ d.company }}
+                      </CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
               </CAccordionBody>
             </CAccordionItem>
           </CAccordion>
@@ -71,39 +132,73 @@
     </CCol>
     <CCol :xs="12">
       <CPagination align="center" aria-label="Page navigation example">
-        <CPaginationItem href="#">Previous</CPaginationItem>
-        <CPaginationItem href="#">1</CPaginationItem>
-        <CPaginationItem href="#">2</CPaginationItem>
-        <CPaginationItem href="#">3</CPaginationItem>
-        <CPaginationItem href="#">Next</CPaginationItem>
+        <CPaginationItem @click="pagePrevious">Previous</CPaginationItem>
+        <CPaginationItem @click="pageNext">Next</CPaginationItem>
       </CPagination>
     </CCol>
   </CRow>
 </template>
 
 <script>
+import axios from 'axios'
+const pagination = 5
 export default {
   name: 'User',
   data() {
     return {
-      searchKey: '1',
-      searchMethod: '1',
+      searchKey: '',
+      searchMethod: '',
       keyword: '',
-      items: [
-        {
-          header: 'asdf',
-          body: 'qwer',
-        },
-        {
-          header: 'gggg',
-          body: 'ggggggg',
-        },
-      ],
+      selectedSearchKey: '',
+      selectedSearchMethod: '',
+      userInfo: [],
+      currentPage: 0,
+      currentPageUserInfo: [],
+      currentPageFirst: 0,
     }
   },
   methods: {
     getData() {
-      alert(this.searchKey + this.searchMethod + this.keyword)
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8888/api/v1/query_users',
+        data: {
+          keytype: this.searchKey,
+          method: this.searchMethod,
+          keyword: this.keyword,
+          admin_tokens: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        },
+      }).then((response) => {
+        this.userInfo = response.data
+        this.currentPageFirst = this.currentPage * pagination
+        this.currentPageUserInfo = this.userInfo.slice(
+          this.currentPageFirst,
+          this.currentPageFirst + pagination,
+        )
+        this.selectedSearchKey = this.searchKey
+        this.selectedSearchMethod = this.searchMethod
+      })
+    },
+    pagePrevious() {
+      if (this.currentPage > 0) {
+        this.currentPage -= 1
+      }
+    },
+    pageNext() {
+      if (this.currentPage < this.userInfo.length / pagination - 1) {
+        this.currentPage += 1
+      }
+    },
+  },
+  watch: {
+    currentPage: function () {
+      this.currentPageFirst = this.currentPage * pagination
+      this.currentPageUserInfo = this.userInfo.slice(
+        this.currentPageFirst,
+        this.currentPageFirst + pagination,
+      )
     },
   },
   setup() {
