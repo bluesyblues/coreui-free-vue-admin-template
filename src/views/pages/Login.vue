@@ -91,6 +91,9 @@ export default {
           password: this.password,
         },
       }).then(function (response) {
+        if (response.data.is_admin === 0) {
+          alert('not admin')
+        }
         const access_token = response.data.tokens.access_token
         const refresh_token = response.data.tokens.refresh_token
         localStorage.setItem('access_token', access_token)

@@ -58,6 +58,7 @@
     <CCol :xs="12">
       <CCard class="mb-2">
         <CCardBody>
+          Items : {{ userInfo.length }}
           <CAccordion flush>
             <CAccordionItem :key="i" v-for="(d, i) in currentPageUserInfo">
               <CAccordionHeader v-if="selectedSearchKey === 'username'">
@@ -73,54 +74,82 @@
                 <CTable>
                   <CTableBody>
                     <CTableRow>
-                      <CTableDataCell>
-                        user_id : {{ d.user_id }}
+                      <CTableDataCell>user_id</CTableDataCell>
+                      <CTableDataCell>{{ d.user_id }}</CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+                <CTable>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell color="dark">username</CTableDataCell>
+                      <CTableDataCell>{{ d.username }}</CTableDataCell>
+                      <CTableDataCell color="dark">email</CTableDataCell>
+                      <CTableDataCell>{{ d.email }}</CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell color="dark">is_active</CTableDataCell>
+                      <CTableDataCell>{{ d.is_active }}</CTableDataCell>
+                      <CTableDataCell color="dark">is_admin</CTableDataCell>
+                      <CTableDataCell>{{ d.is_admin }}</CTableDataCell>
+                    </CTableRow>
+                    <CTableRow>
+                      <CTableDataCell color="dark">
+                        privacy_policy_agreement
                       </CTableDataCell>
                       <CTableDataCell>
-                        username : {{ d.username }}
+                        {{ isEmpty(d.privacy_policy_agreement) }}
                       </CTableDataCell>
-                      <CTableDataCell>email : {{ d.email }}</CTableDataCell>
-                      <CTableDataCell>
-                        is_active : {{ d.is_active }}
+                      <CTableDataCell color="dark">
+                        marketing_agreement
                       </CTableDataCell>
                       <CTableDataCell>
-                        is_admin : {{ d.is_admin }}
+                        {{ isEmpty(d.marketing_agreement) }}
+                      </CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+                <CTable>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell color="dark">first_name</CTableDataCell>
+                      <CTableDataCell>
+                        {{ isEmpty(d.first_name) }}
+                      </CTableDataCell>
+                      <CTableDataCell color="dark">last_name</CTableDataCell>
+                      <CTableDataCell>
+                        {{ isEmpty(d.last_name) }}
+                      </CTableDataCell>
+                      <CTableDataCell color="dark">company</CTableDataCell>
+                      <CTableDataCell>
+                        {{ isEmpty(d.company) }}
                       </CTableDataCell>
                     </CTableRow>
                     <CTableRow>
-                      <CTableDataCell>
-                        created_time : {{ d.created_time }}
+                      <CTableDataCell color="dark">
+                        compression_toolkit_authority
                       </CTableDataCell>
-                      <CTableDataCell>
-                        last_login_time : {{ d.last_login_time }}
+                      <CTableDataCell>{{ d.authorities[0] }}</CTableDataCell>
+                      <CTableDataCell color="dark">
+                        model_search_authority
                       </CTableDataCell>
-                      <CTableDataCell>
-                        compression_toolkit_authority : {{ d.authorities[0] }}
+                      <CTableDataCell>{{ d.authorities[1] }}</CTableDataCell>
+                      <CTableDataCell color="dark">
+                        device_farm_authority
                       </CTableDataCell>
-                      <CTableDataCell>
-                        model_search_authority : {{ d.authorities[1] }}
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        device_farm_authority : {{ d.authorities[2] }}
-                      </CTableDataCell>
+                      <CTableDataCell>{{ d.authorities[2] }}</CTableDataCell>
                     </CTableRow>
+                  </CTableBody>
+                </CTable>
+                <CTable>
+                  <CTableBody>
                     <CTableRow>
-                      <CTableDataCell>
-                        privacy_policy_agreement :
-                        {{ d.privacy_policy_agreement }}
+                      <CTableDataCell color="dark">created_time</CTableDataCell>
+                      <CTableDataCell>{{ d.created_time }}</CTableDataCell>
+                      <CTableDataCell color="dark">
+                        last_login_time
                       </CTableDataCell>
-                      <CTableDataCell>
-                        marketing_agreement : {{ d.marketing_agreement }}
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        first_name : {{ d.first_name }}
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        last_name : {{ d.last_name }}
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        company : {{ d.company }}
-                      </CTableDataCell>
+                      <CTableDataCell>{{ d.last_login_time }}</CTableDataCell>
                     </CTableRow>
                   </CTableBody>
                 </CTable>
@@ -141,6 +170,7 @@
 
 <script>
 import axios from 'axios'
+
 const pagination = 5
 export default {
   name: 'User',
@@ -189,6 +219,13 @@ export default {
     pageNext() {
       if (this.currentPage < this.userInfo.length / pagination - 1) {
         this.currentPage += 1
+      }
+    },
+    isEmpty(value) {
+      if (value == null || value.length === 0) {
+        return 'N/A'
+      } else {
+        return value
       }
     },
   },
