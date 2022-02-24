@@ -543,6 +543,7 @@ export default {
           },
         },
       })
+      this.refreshAll()
     },
     isActiveChange(user_id) {
       this.isActiveOpen = false
@@ -557,6 +558,7 @@ export default {
           },
         },
       })
+      this.refreshAll()
     },
     detailInfoChange(user_id) {
       this.detailInfoOpen = false
@@ -577,6 +579,7 @@ export default {
           },
         },
       })
+      this.refreshAll()
     },
     authorityInfoChange(user_id) {
       this.authorityInfoOpen = false
@@ -596,6 +599,10 @@ export default {
           },
         },
       })
+      this.refreshAll()
+    },
+    refreshAll() {
+      this.$router.go()
     },
   },
   watch: {
