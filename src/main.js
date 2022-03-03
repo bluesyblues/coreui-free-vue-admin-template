@@ -8,8 +8,11 @@ import CIcon from '@coreui/icons-vue'
 import { iconsSet as icons } from '@/assets/icons'
 import DocsCallout from '@/components/DocsCallout'
 import DocsExample from '@/components/DocsExample'
+import mitt from 'mitt'
 
 const app = createApp(App)
+const emitter = mitt()
+app.config.globalProperties.emitter = emitter
 app.use(store)
 app.use(router)
 app.use(CoreuiVue)
