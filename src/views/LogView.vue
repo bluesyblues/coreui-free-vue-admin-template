@@ -2,7 +2,6 @@
   <h5>Query</h5>
   <QueryLog></QueryLog>
   <br />
-  <h5>Result</h5>
   <LogList></LogList>
 </template>
 <script>

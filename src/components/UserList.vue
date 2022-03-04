@@ -1,6 +1,6 @@
 <template>
   <CCard class="mb-2">
-    <div v-if="userList.length > 0">
+    <div v-if="userList.length > 0" align="right">
       Items : {{ userList.length }} Pages : {{ currentPage + 1 }} /
       {{ Math.floor(userList.length / pagination) + 1 }}
     </div>

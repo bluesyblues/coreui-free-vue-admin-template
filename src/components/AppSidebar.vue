@@ -12,16 +12,7 @@
     "
   >
     <CSidebarBrand>
-      <CIcon
-        custom-class-name="sidebar-brand-full"
-        :icon="cilShieldAlt"
-        :height="35"
-      />
-      <CIcon
-        custom-class-name="sidebar-brand-narrow"
-        :icon="sygnet"
-        :height="35"
-      />
+      <CImage fluid :src="logo" />
     </CSidebarBrand>
     <AppSidebarNav />
     <CSidebarToggler
@@ -38,17 +29,17 @@ import { AppSidebarNav } from './AppSidebarNav'
 import { logoNegative } from '@/assets/brand/logo-negative'
 import { sygnet } from '@/assets/brand/sygnet'
 import { cilShieldAlt } from '@coreui/icons'
-import { CIcon } from '@coreui/icons-vue'
+import logo from '@/assets/images/vue.jpg'
 
 export default {
   name: 'AppSidebar',
   components: {
     AppSidebarNav,
-    CIcon,
   },
   setup() {
     const store = useStore()
     return {
+      logo,
       cilShieldAlt,
       logoNegative,
       sygnet,

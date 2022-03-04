@@ -2,7 +2,6 @@
   <h5>Query</h5>
   <Query></Query>
   <br />
-  <h5>Result</h5>
   <UserList></UserList>
 </template>
 <script>

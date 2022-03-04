@@ -1,9 +1,16 @@
 <template>
-  <CCard class="mb-2">
-    <div v-if="logList.length > 0">
-      Items : {{ logList.length }} Pages : {{ currentPage + 1 }} /
-      {{ Math.floor(logList.length / pagination) + 1 }} User ID : {{ userId }}
-    </div>
+  <CCard class="mb-2" v-if="logList.length > 0">
+    <CRow>
+      <CCol align="left">
+        <div>User ID : {{ userId }}</div>
+      </CCol>
+      <CCol>
+        <div align="right">
+          Items : {{ logList.length }} Pages : {{ currentPage + 1 }} /
+          {{ Math.floor(logList.length / pagination) + 1 }}
+        </div>
+      </CCol>
+    </CRow>
     <CTable>
       <CTableHead>
         <CTableRow>
