@@ -2,7 +2,7 @@
   <CCard class="mb-2">
     <div v-if="userList.length > 0">
       Items : {{ userList.length }} Pages : {{ currentPage + 1 }} /
-      {{ userList.length / pagination + 1 }}
+      {{ Math.floor(userList.length / pagination) + 1 }}
     </div>
     <CAccordion flush>
       <CAccordionItem :key="i" v-for="(d, i) in currentPageUserInfo">
