@@ -59,8 +59,8 @@
       color="primary"
       @click="
         () => {
-          detailInfoChange(userInfo.user_id)
           detailInfoOpen = false
+          detailInfoChange(userInfo.user_id)
         }
       "
     >
@@ -69,8 +69,6 @@
   </CModalFooter>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   emits: ['close-modal'],
   props: ['userInfo'],
@@ -92,8 +90,8 @@ export default {
         return value
       }
     },
-    detailInfoChange(userId) {
-      axios({
+    async detailInfoChange(userId) {
+      await this.axiosInstance({
         method: 'post',
         url: 'http://127.0.0.1:8888/api/v1/update_detail_info_admin',
         data: {
@@ -111,6 +109,7 @@ export default {
         },
       })
       alert('Change saved')
+      this.emitter.emit('refresh')
     },
     isEmpty(value) {
       if (value == null || value.length === 0) {
@@ -124,7 +123,6 @@ export default {
     detailInfoOpen: function () {
       if (this.detailInfoOpen === false) {
         this.$emit('close-modal')
-        this.emitter.emit('refresh')
       }
     },
   },

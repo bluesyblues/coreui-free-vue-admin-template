@@ -39,8 +39,6 @@
   </CModalFooter>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   emits: ['close-modal'],
   props: ['userId'],
@@ -51,9 +49,9 @@ export default {
     }
   },
   methods: {
-    isActiveChange(userId) {
+    async isActiveChange(userId) {
       console.log(userId)
-      axios({
+      await this.axiosInstance({
         method: 'post',
         url: 'http://127.0.0.1:8888/api/v1/activation_admin',
         data: {
@@ -65,13 +63,13 @@ export default {
         },
       })
       alert('Change saved')
+      this.emitter.emit('refresh')
     },
   },
   watch: {
     isActiveOpen: function () {
       if (this.isActiveOpen === false) {
         this.$emit('close-modal')
-        this.emitter.emit('refresh')
       }
     },
   },

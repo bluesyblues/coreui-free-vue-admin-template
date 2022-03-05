@@ -62,8 +62,6 @@
   </CCard>
 </template>
 <script>
-import axios from 'axios'
-
 const adjustDate = function (value) {
   if (value.length == 1) {
     return '0' + value
@@ -75,7 +73,7 @@ const adjustDate = function (value) {
 const today = new Date()
 let todayYear = today.getFullYear()
 let todayMonth = adjustDate(String(today.getMonth() + 1))
-let todayDate = adjustDate(String(today.getDate()))
+let todayDate = adjustDate(String(today.getDate() + 1))
 
 let weekAgo = new Date(today)
 weekAgo.setDate(today.getDate() - 7)
@@ -99,8 +97,8 @@ export default {
     this.emitter.on('refresh', this.getData)
   },
   methods: {
-    getData() {
-      axios({
+    async getData() {
+      await this.axiosInstance({
         method: 'post',
         url: 'http://127.0.0.1:8888/api/v1/query_user_logs',
         data: {

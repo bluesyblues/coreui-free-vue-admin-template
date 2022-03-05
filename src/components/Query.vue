@@ -52,8 +52,6 @@
   </CCard>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Query',
   data() {
@@ -68,8 +66,8 @@ export default {
     this.emitter.on('refresh', this.getData)
   },
   methods: {
-    getData() {
-      axios({
+    async getData() {
+      await this.axiosInstance({
         method: 'post',
         url: 'http://127.0.0.1:8888/api/v1/query_users',
         data: {

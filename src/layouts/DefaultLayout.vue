@@ -26,5 +26,27 @@ export default {
     AppSidebar,
     CContainer,
   },
+  methods: {
+    async tokenValidation() {
+      await this.axiosInstance({
+        method: 'post',
+        url: 'http://127.0.0.1:8888/api/v1/token_validation',
+        data: {
+          access_token: localStorage.getItem('access_token'),
+        },
+      })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$forceUpdate()
+          this.$router.push('/login')
+        })
+    },
+  },
+  created() {
+    this.tokenValidation()
+  },
 }
 </script>

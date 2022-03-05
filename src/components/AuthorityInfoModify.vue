@@ -71,8 +71,6 @@
   </CModalFooter>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   emits: ['close-modal'],
   props: ['userId'],
@@ -85,8 +83,8 @@ export default {
     }
   },
   methods: {
-    authorityInfoChange(userId) {
-      axios({
+    async authorityInfoChange(userId) {
+      await this.axiosInstance({
         method: 'post',
         url: 'http://127.0.0.1:8888/api/v1/update_authority_info',
         data: {
@@ -103,13 +101,13 @@ export default {
         },
       })
       alert('Change saved')
+      this.emitter.emit('refresh')
     },
   },
   watch: {
     authorityInfoOpen: function () {
       if (this.authorityInfoOpen === false) {
         this.$emit('close-modal')
-        this.emitter.emit('refresh')
       }
     },
   },

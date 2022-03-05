@@ -148,8 +148,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -171,11 +169,11 @@ export default {
     }
   },
   methods: {
-    addUser() {
+    async addUser() {
       if (this.passwordInput !== this.passwordValidationInput) {
         alert('password not valid')
       } else {
-        axios({
+        await this.axiosInstance({
           method: 'post',
           url: 'http://127.0.0.1:8888/api/v1/signup',
           data: {
@@ -190,10 +188,10 @@ export default {
               company: this.companyInput,
             },
           },
-        }).then((response) => {
+        }).then(async (response) => {
           this.userId = response.data.user_id
           if (this.isActiveSelect !== null && this.userId !== null) {
-            axios({
+            await this.axiosInstance({
               method: 'post',
               url: 'http://127.0.0.1:8888/api/v1/activation_admin',
               data: {
@@ -206,7 +204,7 @@ export default {
             })
           }
           if (this.isAdminSelect !== null && this.userId !== null) {
-            axios({
+            await this.axiosInstance({
               method: 'post',
               url: 'http://127.0.0.1:8888/api/v1/update_admin',
               data: {
@@ -219,7 +217,7 @@ export default {
             })
           }
           if (this.userId !== null) {
-            axios({
+            await this.axiosInstance({
               method: 'post',
               url: 'http://127.0.0.1:8888/api/v1/update_authority_info',
               data: {
@@ -236,7 +234,7 @@ export default {
               },
             })
           }
-          alert(this.username + ' (' + this.userId + ') added')
+          alert(this.usernameInput + ' (' + this.userId + ') added')
           this.$router.go()
         })
       }
