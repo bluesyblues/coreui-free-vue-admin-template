@@ -7,11 +7,6 @@
       <CHeaderBrand class="mx-auto d-lg-none" to="/">
         <CIcon :icon="logo" height="48" alt="Logo" />
       </CHeaderBrand>
-      <CHeaderNav>
-        <CNavItem>
-          <CNavLink href="/#/account"> Account </CNavLink>
-        </CNavItem>
-      </CHeaderNav>
     </CContainer>
     <CHeaderDivider />
     <CContainer fluid>

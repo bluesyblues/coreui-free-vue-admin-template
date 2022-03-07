@@ -37,6 +37,11 @@
                 aria-describedby="button-addon2"
               />
               <CButton
+                :disabled="
+                  searchKey.length == 0 ||
+                  searchMethod.length == 0 ||
+                  keyword == 0
+                "
                 type="button"
                 color="secondary"
                 variant="outline"
