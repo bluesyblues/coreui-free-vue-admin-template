@@ -32,7 +32,7 @@ export default {
         method: 'post',
         url: this.url + '/token_validation',
         data: {
-          access_token: localStorage.getItem('access_token'),
+          access_token: sessionStorage.getItem('access_token'),
         },
       })
         .then((response) => {

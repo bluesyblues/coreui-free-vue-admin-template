@@ -58,7 +58,7 @@ export default {
           user_id: userId,
           is_admin: this.isAdminSelect,
           admin_tokens: {
-            access_token: localStorage.getItem('access_token'),
+            access_token: sessionStorage.getItem('access_token'),
           },
         },
       })

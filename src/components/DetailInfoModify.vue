@@ -104,7 +104,7 @@ export default {
             company: this.isNA(this.companyInput),
           },
           admin_tokens: {
-            access_token: localStorage.getItem('access_token'),
+            access_token: sessionStorage.getItem('access_token'),
           },
         },
       })

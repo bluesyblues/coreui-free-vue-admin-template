@@ -65,6 +65,7 @@ export default {
       searchMethod: '',
       keyword: '',
       userList: [],
+      queryResult: '',
     }
   },
   mounted() {
@@ -80,18 +81,18 @@ export default {
           method: this.searchMethod,
           keyword: this.keyword,
           admin_tokens: {
-            access_token: localStorage.getItem('access_token'),
+            access_token: sessionStorage.getItem('access_token'),
           },
         },
       }).then((response) => {
-        let queryResult = {
+        this.queryResult = {
           data: response.data,
           keytype: this.searchKey,
           keyword: this.keyword,
           method: this.searchMethod,
         }
-        this.emitter.emit('queryResult', queryResult)
       })
+      this.emitter.emit('queryResult', this.queryResult)
       console.log('getdata')
     },
   },

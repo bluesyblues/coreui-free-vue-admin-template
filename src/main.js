@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(
       method: 'post',
       url: url + '/token_validation',
       data: {
-        access_token: localStorage.getItem('access_token'),
+        access_token: sessionStorage.getItem('access_token'),
       },
     })
       .then((response) => {
@@ -32,8 +32,8 @@ axiosInstance.interceptors.request.use(
           method: 'post',
           url: url + '/refresh_token',
           data: {
-            access_token: localStorage.getItem('access_token'),
-            refresh_token: localStorage.getItem('refresh_token'),
+            access_token: sessionStorage.getItem('access_token'),
+            refresh_token: sessionStorage.getItem('refresh_token'),
           },
         })
           .then((response) => {
@@ -42,8 +42,8 @@ axiosInstance.interceptors.request.use(
             }
             const access_token = response.data.tokens.access_token
             const refresh_token = response.data.tokens.refresh_token
-            localStorage.setItem('access_token', access_token)
-            localStorage.setItem('refresh_token', refresh_token)
+            sessionStorage.setItem('access_token', access_token)
+            sessionStorage.setItem('refresh_token', refresh_token)
             this.correct = true
           })
           .catch((error) => {

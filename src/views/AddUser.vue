@@ -198,7 +198,7 @@ export default {
                 user_id: this.userId,
                 activation: this.isActiveSelect,
                 admin_tokens: {
-                  access_token: localStorage.getItem('access_token'),
+                  access_token: sessionStorage.getItem('access_token'),
                 },
               },
             })
@@ -211,7 +211,7 @@ export default {
                 user_id: this.userId,
                 is_admin: this.isAdminSelect,
                 admin_tokens: {
-                  access_token: localStorage.getItem('access_token'),
+                  access_token: sessionStorage.getItem('access_token'),
                 },
               },
             })
@@ -229,7 +229,7 @@ export default {
                   device_farm_authority: this.deviceFarmAuthoritySelect,
                 },
                 admin_tokens: {
-                  access_token: localStorage.getItem('access_token'),
+                  access_token: sessionStorage.getItem('access_token'),
                 },
               },
             })

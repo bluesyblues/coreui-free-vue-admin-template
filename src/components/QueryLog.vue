@@ -98,6 +98,7 @@ export default {
   },
   methods: {
     async getData() {
+      this.$router.go(this.$router.currentRoute)
       await this.axiosInstance({
         method: 'post',
         url: this.url + '/query_user_logs',
@@ -106,7 +107,7 @@ export default {
           start_time: this.startDate + ' ' + this.startTime,
           end_time: this.endDate + ' ' + this.endTime,
           admin_tokens: {
-            access_token: localStorage.getItem('access_token'),
+            access_token: sessionStorage.getItem('access_token'),
           },
         },
       }).then((response) => {

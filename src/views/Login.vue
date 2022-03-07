@@ -97,8 +97,8 @@ export default {
           }
           const access_token = response.data.tokens.access_token
           const refresh_token = response.data.tokens.refresh_token
-          localStorage.setItem('access_token', access_token)
-          localStorage.setItem('refresh_token', refresh_token)
+          sessionStorage.setItem('access_token', access_token)
+          sessionStorage.setItem('refresh_token', refresh_token)
           this.correct = true
         })
         .catch((error) => {
@@ -106,7 +106,6 @@ export default {
           alert('Invalid login info')
         })
       if (this.correct === true) {
-        this.$forceUpdate()
         this.$router.push('user')
       }
     },

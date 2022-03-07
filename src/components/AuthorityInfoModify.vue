@@ -96,7 +96,7 @@ export default {
             device_farm_authority: this.deviceFarmAuthoritySelect,
           },
           admin_tokens: {
-            access_token: localStorage.getItem('access_token'),
+            access_token: sessionStorage.getItem('access_token'),
           },
         },
       })
