@@ -175,7 +175,7 @@ export default {
       } else {
         await this.axiosInstance({
           method: 'post',
-          url: 'http://127.0.0.1:8888/api/v1/signup',
+          url: this.url + '/signup',
           data: {
             username: this.usernameInput,
             password: this.passwordInput,
@@ -193,7 +193,7 @@ export default {
           if (this.isActiveSelect !== null && this.userId !== null) {
             await this.axiosInstance({
               method: 'post',
-              url: 'http://127.0.0.1:8888/api/v1/activation_admin',
+              url: this.url + '/activation_admin',
               data: {
                 user_id: this.userId,
                 activation: this.isActiveSelect,
@@ -206,7 +206,7 @@ export default {
           if (this.isAdminSelect !== null && this.userId !== null) {
             await this.axiosInstance({
               method: 'post',
-              url: 'http://127.0.0.1:8888/api/v1/update_admin',
+              url: this.url + '/update_admin',
               data: {
                 user_id: this.userId,
                 is_admin: this.isAdminSelect,
@@ -219,7 +219,7 @@ export default {
           if (this.userId !== null) {
             await this.axiosInstance({
               method: 'post',
-              url: 'http://127.0.0.1:8888/api/v1/update_authority_info',
+              url: this.url + '/update_authority_info',
               data: {
                 user_id: this.userId,
                 authorities: {

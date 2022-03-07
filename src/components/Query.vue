@@ -69,7 +69,7 @@ export default {
     async getData() {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/query_users',
+        url: this.url + '/query_users',
         data: {
           keytype: this.searchKey,
           method: this.searchMethod,

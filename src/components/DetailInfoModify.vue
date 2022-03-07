@@ -93,7 +93,7 @@ export default {
     async detailInfoChange(userId) {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/update_detail_info_admin',
+        url: this.url + '/update_detail_info_admin',
         data: {
           user_id: userId,
           detail_data: {

@@ -86,7 +86,7 @@ export default {
     async authorityInfoChange(userId) {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/update_authority_info',
+        url: this.url + '/update_authority_info',
         data: {
           user_id: userId,
           authorities: {

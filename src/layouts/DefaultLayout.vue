@@ -30,7 +30,7 @@ export default {
     async tokenValidation() {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/token_validation',
+        url: this.url + '/token_validation',
         data: {
           access_token: localStorage.getItem('access_token'),
         },

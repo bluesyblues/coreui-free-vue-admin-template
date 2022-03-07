@@ -12,12 +12,13 @@ import axios, { AxiosRequestConfig } from 'axios'
 const app = createApp(App)
 const emitter = mitt()
 const axiosInstance = axios.create()
+const url = 'http://3.38.129.150:8888/api/v1'
 
 axiosInstance.interceptors.request.use(
   function (config = AxiosRequestConfig) {
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8888/api/v1/token_validation',
+      url: url + '/token_validation',
       data: {
         access_token: localStorage.getItem('access_token'),
       },
@@ -29,7 +30,7 @@ axiosInstance.interceptors.request.use(
         console.log(error)
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8888/api/v1/refresh_token',
+          url: url + '/refresh_token',
           data: {
             access_token: localStorage.getItem('access_token'),
             refresh_token: localStorage.getItem('refresh_token'),
@@ -56,6 +57,7 @@ axiosInstance.interceptors.request.use(
   },
 )
 
+app.config.globalProperties.url = url
 app.config.globalProperties.axiosInstance = axiosInstance
 app.config.globalProperties.emitter = emitter
 app.use(store)

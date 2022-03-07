@@ -100,7 +100,7 @@ export default {
     async getData() {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/query_user_logs',
+        url: this.url + '/query_user_logs',
         data: {
           user_id: this.userId,
           start_time: this.startDate + ' ' + this.startTime,

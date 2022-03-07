@@ -53,7 +53,7 @@ export default {
       console.log(userId)
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/update_admin',
+        url: this.url + '/update_admin',
         data: {
           user_id: userId,
           is_admin: this.isAdminSelect,

@@ -85,7 +85,7 @@ export default {
     async getLoginData() {
       await this.axiosInstance({
         method: 'post',
-        url: 'http://127.0.0.1:8888/api/v1/login',
+        url: this.url + '/login',
         data: {
           username: this.username,
           password: this.password,
