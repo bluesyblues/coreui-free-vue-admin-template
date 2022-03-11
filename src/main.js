@@ -12,7 +12,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 const app = createApp(App)
 const emitter = mitt()
 const axiosInstance = axios.create()
-const url = 'http://3.38.129.150:8888/api/v1'
+const url = 'https://login.netspresso.ai:8888/api/v1'
 
 axiosInstance.interceptors.request.use(
   function (config = AxiosRequestConfig) {

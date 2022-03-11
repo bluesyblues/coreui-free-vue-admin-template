@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     async getData() {
-      this.$router.go(this.$router.currentRoute)
       await this.axiosInstance({
         method: 'post',
         url: this.url + '/query_user_logs',
